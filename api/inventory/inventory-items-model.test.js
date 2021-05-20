@@ -20,21 +20,21 @@ describe("Inventory", () => {
   describe("getByID()", () => {
     it("resolves to item with id", () => {
       //
-    }); //resolves to item with id
+    });
   }); //getByID()
 
   describe("insert()", () => {
     it("resolves to inserted object", () => {
       //
-    }); //resolves to inserted object
+    });
 
     it("resolves to item with id", () => {
       //
-    }); //resolves to item with id
+    });
 
     it("adds item to db", () => {
       //
-    }); //adds item to db
+    });
   }); //insert()
 
   describe("remove()", () => {
@@ -44,6 +44,6 @@ describe("Inventory", () => {
 
     it("deletes item from db", () => {
       //
-    }); //deletes item from db
+    });
   });
 }); //inventory
