@@ -107,4 +107,4 @@ dist
 .tern-port
 
 # VSCode debugger config
-.vscode/launch.json
+.vscode
