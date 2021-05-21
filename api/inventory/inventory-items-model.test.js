@@ -2,6 +2,7 @@ const Inventory = require("./inventory-items-model");
 const db = require("../../data/dbConfig");
 
 const itemsTbl = "inventory_items";
+const itemId = "inventory_item_id";
 const item = { inventory_item_name: "apple", qty_in_stock: 2 };
 
 beforeAll(async () => {
@@ -30,12 +31,19 @@ describe("Inventory", () => {
       expect(resolvedItem).toMatchObject(item);
     });
 
-    it("resolves to item with id", () => {
-      //
+    it("resolves to item with id", async () => {
+      const resolvedItem = await Inventory.insert(item);
+      expect(resolvedItem).toHaveProperty("inventory_item_id");
     });
 
-    it("adds item to db", () => {
-      //
+    it("adds item to db", async () => {
+      const resolvedItem = await Inventory.insert(item);
+      const dbItem = await db(itemsTbl)
+        .where({
+          [itemId]: resolvedItem[itemId],
+        })
+        .first();
+      expect(resolvedItem).toMatchObject(dbItem);
     });
   }); //insert()
 
