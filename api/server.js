@@ -12,6 +12,14 @@ server.post("/inventory", (req, res, next) => {
     .catch(next);
 });
 
+server.delete("/inventory/:id", (req, res, next) => {
+  Inventory.remove(req.params.id)
+    .then((deletedItem) => {
+      res.status(200).json(deletedItem);
+    })
+    .catch(next);
+});
+
 server.get("/", (_req, res) => {
   res.status(200).json({ api: "up" });
 });

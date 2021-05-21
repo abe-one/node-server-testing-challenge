@@ -46,16 +46,20 @@ describe("!!REFRACTOR into ROUTER!! Server ", () => {
       const res = await request(server).delete(`/inventory/${item1Id}`);
       expect(res.body).toMatchObject(item1);
     });
+
     it("deletes item from database", async () => {
       await request(server).delete(`/inventory/${item1Id}`);
       const inventory = await db(itemsTbl);
       expect(inventory).toHaveLength(0);
     });
+
     it("deletes single item from database", async () => {
       await db(itemsTbl).insert(item2);
       await request(server).delete(`/inventory/${item1Id}`);
       const inventory = await db(itemsTbl);
-      expect([inventory]).not.toMatch(item1);
+
+      expect(inventory).toHaveLength(1);
+      expect(inventory[0]).not.toMatchObject(item1);
     });
   }); //[DELETE] /inventory/:id
 }); //Server !!REFRACTOR into ROUTER
