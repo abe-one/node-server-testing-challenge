@@ -3,12 +3,14 @@ const db = require("../../data/dbConfig");
 // todo: getAll, getBy, update
 
 const getByID = (id) => {
-  db("inventory_items").where({ inventory_item_id: id }).first();
+  return db("inventory_items").where({ inventory_item_id: id }).first();
 };
 
-const insert = (item) => {
-  return null;
+const insert = async (item) => {
+  const id = await db("inventory_items").insert(item);
+  return getByID([id]);
 };
+
 const remove = (id) => {
   return null;
 };
