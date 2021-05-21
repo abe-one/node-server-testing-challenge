@@ -11,8 +11,10 @@ const insert = async (item) => {
   return getByID([id]);
 };
 
-const remove = (id) => {
-  return null;
+const remove = async (id) => {
+  const deletedItem = await getByID(id);
+  await db("inventory_items").where({ inventory_item_id: id }).del();
+  return deletedItem;
 };
 
 module.exports = {

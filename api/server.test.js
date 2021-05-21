@@ -13,12 +13,11 @@ beforeAll(async () => {
 beforeEach(async () => await db(itemsTbl).truncate());
 afterAll(async () => await db.destroy());
 
-describe("Server !!REFRACTOR into ROUTER", () => {
+describe("!!REFRACTOR into ROUTER!! Server ", () => {
   describe("[POST] /inventory", () => {
-    beforeEach(async () => await db(itemsTbl).insert(item));
-
-    it("responds with status 201", () => {
-      //
+    it("responds with status 201", async () => {
+      const res = await request(server).post("/inventory").send(item);
+      expect(res.status).toBe(201);
     });
 
     it("responds with posted item", () => {
