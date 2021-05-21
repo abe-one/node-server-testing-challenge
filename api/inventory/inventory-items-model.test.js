@@ -48,12 +48,19 @@ describe("Inventory", () => {
   }); //insert()
 
   describe("remove()", () => {
-    it("resolves to deleted item", () => {
-      //
+    it("resolves to deleted item", async () => {
+      const insertedItem = await Inventory.insert(item);
+      const resolvedItem = await Inventory.remove(insertedItem[itemId]);
+      expect(resolvedItem).toMatchObject(item);
     });
 
-    it("deletes item from db", () => {
-      //
+    it("deletes item from db", async () => {
+      const insertedItem = await Inventory.insert(item);
+      const resolvedItem = await Inventory.remove(insertedItem[itemId]);
+      const deletedItem = await db(itemsTbl).where({
+        [itemId]: resolvedItem[itemId],
+      });
+      expect(deletedItem).toHaveLength(0);
     });
   });
 }); //inventory
